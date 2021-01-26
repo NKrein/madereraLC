@@ -107,4 +107,3 @@ switch (consultaMedida) {
         console.log(stockMedidas[2]);
     break;
 }
-
