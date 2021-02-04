@@ -1,109 +1,103 @@
 
 //--------------------------------------------------------------------------------------DEFINICION STOCK--
-function StockMachimbre (media, trescuarto, una){
+function StockMachimbre(media, trescuarto, una) {
     this.media = media;
     this.trescuarto = trescuarto;
     this.una = una;
+}
+
+function cargarStock() {
+
+    let stockMedia = document.getElementById("stockMedia").value;
+    let stockTrescuarto = document.getElementById("stockTrescuarto").value;
+    let stockUna = document.getElementById("stockUna").value;
+
+    let stockMachimbre = new StockMachimbre(stockMedia, stockTrescuarto, stockUna);
+
+    if (stockMedia != "" && stockTrescuarto != "" && stockUna != "") {
+        console.log(stockMachimbre);
+        console.log("STOCK DE M² CARGADO");
+    } else {
+        console.log("STOCK NO CARGADO");
+    }
+
+    localStorage.setItem("stock", JSON.stringify(stockMachimbre));
+
+
 
 }
-var stockMedia = parseInt(prompt("Ingrese stock machimbre de 1/2 pulgada (m²): "));
-var stockTrescuarto = parseInt(prompt("Ingrese stock machimbre de 3/4 pulgada (m²): "));
-var stockUna = parseInt(prompt("Ingrese stock machimbre de 1 pulgada (m²): "));
 
-var stockMachimbre = new StockMachimbre(stockMedia, stockTrescuarto, stockUna);
-console.log(stockMachimbre);
-console.log("STOCK DE M² CARGADO");
-
-var stockMedidas = [{
-    medida:"Media",
-    "2m":parseInt(prompt("Ingrese cantidad stock de 1/2 en 2 metros:")),
-    "2.5m":parseInt(prompt("Ingrese cantidad stock de 1/2 en 2.5 metros:")),
-    "3m":parseInt(prompt("Ingrese cantidad stock de 1/2 en 3 metros:")),
-    "4m":parseInt(prompt("Ingrese cantidad stock de 1/2 en 4 metros:")),
-},{
-    medida:"Trescuartos",
-    "2m":parseInt(prompt("Ingrese cantidad stock de 3/4 en 2 metros:")),
-    "2.5m":parseInt(prompt("Ingrese cantidad stock de 3/4 en 2.5 metros:")),
-    "3m":parseInt(prompt("Ingrese cantidad stock de 3/4 en 3 metros:")),
-    "4m":parseInt(prompt("Ingrese cantidad stock de 3/4 en 4 metros:")),
-
-},{
-    medida:"Una",
-    "2m":parseInt(prompt("Ingrese cantidad stock de 1 en 2 metros:")),
-    "2.5m":parseInt(prompt("Ingrese cantidad stock de 1 en 2.5 metros:")),
-    "3m":parseInt(prompt("Ingrese cantidad stock de 1 en 3 metros:")),
-    "4m":parseInt(prompt("Ingrese cantidad stock de 1 en 4 metros:")),
-
-}
-];
-console.log("STOCK DE LARGO POR MEDIDAS CARGADO");
 
 //------------------------------------------------------------------------------------DEFINICION PRECIOS--
-function PrecioMachimbre (media, trescuarto, una){
+function PrecioMachimbre(media, trescuarto, una) {
     this.media = media;
     this.trescuarto = trescuarto;
     this.una = una;
+}
+
+function cargarPrecios() {
+
+    let precioMedia = document.getElementById("precioMedia").value;
+    let precioTrescuarto = document.getElementById("precioTrescuarto").value;
+    let precioUna = document.getElementById("precioUna").value;
+
+    let precioMachimbre = new PrecioMachimbre(precioMedia, precioTrescuarto, precioUna);
+
+    if (precioMedia != "" && precioTrescuarto != "" && precioUna != "") {
+        console.log(precioMachimbre);
+        console.log("PRECIOS POR MEDIDA CARGADOS");
+    } else {
+        console.log("PRECIOS NO CARGADOS");
+    }
+
+    localStorage.setItem("precio", JSON.stringify(precioMachimbre));
+
 
 }
-var precioMedia = parseInt(prompt("Ingrese precio machimbre de 1/2 pulgada (AR$): "));
-var precioTrescuarto = parseInt(prompt("Ingrese precio machimbre de 3/4 pulgada (AR$): "));
-var precioUna = parseInt(prompt("Ingrese precio machimbre de 1 pulgada (AR$): "));
 
-var precioMachimbre = new PrecioMachimbre(precioMedia, precioTrescuarto, precioUna);
-console.log(precioMachimbre);
-console.log("PRECIOS POR MEDIDA CARGADOS")
+
+
 //-------------------------------------------------------------------------------------------PRESUPUESTO--
 
-
-var cuantoMedia;
-var cuantoTrescuarto;
-var cuantoUna;
-
-cuantoMedia = parseInt(prompt("Ingrese cantidad machimbre de 1/2 que necesita:"));
-cuantoTrescuarto = parseInt(prompt("Ingrese cantidad machimbre de 3/4 que necesita:"));
-cuantoUna = parseInt(prompt("Ingrese cantidad machimbre de 1 que necesita:"));
+function presupuestar() {
 
 
-while (cuantoMedia > stockMedia || cuantoTrescuarto > stockTrescuarto || cuantoUna > stockUna) {
-    alert("Por el momento no tenemos disponibilidad, intente otro valor:");
-    cuantoMedia = parseInt(prompt("Ingrese cantidad machimbre 1/2 que necesita:"));
-    cuantoTrescuarto = parseInt(prompt("Ingrese cantidad machimbre 1/4 que necesita:"));
-    cuantoUna = parseInt(prompt("Ingrese cantidad machimbre de 1 que necesita:"));
-}
+    let cuantoMedia = document.getElementById("cuantoMedia").value;
+    let cuantoTrescuarto = document.getElementById("cuantoTrescuarto").value;
+    let cuantoUna = document.getElementById("cuantoUna").value;
 
-alert("Perfecto! Podemos continuar");
+    let stockMachimbre = JSON.parse(localStorage.getItem("stock"));     //RECUPERO DATOS
+    let precioMachimbre = JSON.parse(localStorage.getItem("precio"));   //<<<<<<<<<<<<<<
 
 
-function precioParcial(precio, cantidad){
-    var resultado = precio*cantidad;
-    return resultado;
-}
+    if (cuantoMedia > stockMachimbre.media || cuantoTrescuarto > stockMachimbre.trescuarto || cuantoUna > stockMachimbre.una) {
 
-var totalMedia = precioParcial(precioMachimbre.media, cuantoMedia);
-console.log("Precio machimbre de 1/2: $" + totalMedia);
+        //let errorStock = document.createElement("p");
+        //errorStock.innerHTML = "No hay disponibre en esa cantidad, intente otra.";
+        //document.body.appendChild(errorStock);
+        console.log("La cantidad seleccionada no está disponible en Stock, pruebe otro valor.")
 
-var totalTresCuarto = precioParcial(precioMachimbre.trescuarto, cuantoTrescuarto);
-console.log("Precio machimbre de 3/4: $" + totalTresCuarto);
+    } else {
 
-var totalUna = precioParcial(precioMachimbre.una, cuantoUna);
-console.log("Precio machimbre de 1: $" + totalUna);
 
-var precioTotal = (totalMedia + totalTresCuarto + totalUna);
-console.log("Precio total del presupuesto: $" + precioTotal);
+        function precioParcial(precio, cantidad) {
+            var resultado = precio * cantidad;
+            return resultado;
+        }
 
-alert("consulte la disponibilidad de largos de machimbre");
+        var totalMedia = precioParcial(precioMachimbre.media, cuantoMedia);
+        console.log("Precio machimbre de 1/2: $" + totalMedia);
 
-var consultaMedida = prompt("Coloque la medida que desea consultar (media, trescuarto o una): ")
+        var totalTresCuarto = precioParcial(precioMachimbre.trescuarto, cuantoTrescuarto);
+        console.log("Precio machimbre de 3/4: $" + totalTresCuarto);
 
-switch (consultaMedida) {
-    case "media":
-        let arrayFiltrado = stockMedidas.filter((el) => el.medida == "Media");
-        console.log(arrayFiltrado);
-    break;
-    case "trescuarto":
-        console.log(stockMedidas[1]);
-    break;
-    case "una":
-        console.log(stockMedidas[2]);
-    break;
+        var totalUna = precioParcial(precioMachimbre.una, cuantoUna);
+        console.log("Precio machimbre de 1: $" + totalUna);
+
+        var precioTotal = (totalMedia + totalTresCuarto + totalUna);
+        console.log("Precio total del presupuesto: $" + precioTotal);
+
+
+    }
+
 }
