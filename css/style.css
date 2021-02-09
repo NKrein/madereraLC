@@ -31,6 +31,17 @@ footer {
   height: 20vh;
   width: 100%; }
 
+#mensajeResultado {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  background-color: darkgray; }
+
+#mensajeStock {
+  background-color: #fba618;
+  color: black; }
+
 @media (max-width: 576px) {
   h1 {
     font-size: 50px; } }

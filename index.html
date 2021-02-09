@@ -104,7 +104,7 @@
         <div class="row">
           <h3 class="col-md-12">Ingrese cantidades que necesita de cada medida de Machimbre</h3>
 
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-6">
             <label class="col-sm-6 col-form-label">1/2 pulgada:</label>
             <div class="col-sm-6">
               <input type="number" class="form-control" id="cuantoMedia">
@@ -119,6 +119,9 @@
             <div class="col-sm-6">
               <input type="number" class="form-control" id="cuantoUna">
             </div>
+          </div>
+          <div id="mensajeResultado" class="col-md-6 col-sm-6">
+            <p id="mensajeStock"></p>
           </div>
         </div>
         <button type="button" onclick="presupuestar()" class="btn btn-primary">Presupuestar</button>

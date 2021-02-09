@@ -21,7 +21,7 @@ function cargarStock() {
         console.log("STOCK NO CARGADO");
     }
 
-    localStorage.setItem("stock", JSON.stringify(stockMachimbre));
+    localStorage.setItem("stock", JSON.stringify(stockMachimbre));              //<<<<<Guardo datos
 
 
 
@@ -50,7 +50,7 @@ function cargarPrecios() {
         console.log("PRECIOS NO CARGADOS");
     }
 
-    localStorage.setItem("precio", JSON.stringify(precioMachimbre));
+    localStorage.setItem("precio", JSON.stringify(precioMachimbre));              //<<<<<Guardo datos
 
 
 }
@@ -58,6 +58,7 @@ function cargarPrecios() {
 
 
 //-------------------------------------------------------------------------------------------PRESUPUESTO--
+
 
 function presupuestar() {
 
@@ -72,12 +73,16 @@ function presupuestar() {
 
     if (cuantoMedia > stockMachimbre.media || cuantoTrescuarto > stockMachimbre.trescuarto || cuantoUna > stockMachimbre.una) {
 
-        //let errorStock = document.createElement("p");
-        //errorStock.innerHTML = "No hay disponibre en esa cantidad, intente otra.";
-        //document.body.appendChild(errorStock);
-        console.log("La cantidad seleccionada no está disponible en Stock, pruebe otro valor.")
+        let mensajeStock = document.getElementById("mensajeStock");
+        mensajeStock.innerHTML = "No hay disponibre en esa cantidad, intente otro valor.";
 
     } else {
+
+
+
+        mensajeStock.innerHTML = "Disponibilidad: OK";
+        let mensajeResultado = document.getElementById("mensajeResultado");
+
 
 
         function precioParcial(precio, cantidad) {
@@ -86,17 +91,26 @@ function presupuestar() {
         }
 
         var totalMedia = precioParcial(precioMachimbre.media, cuantoMedia);
-        console.log("Precio machimbre de 1/2: $" + totalMedia);
+        let parcialMedia = document.createElement("p");
+        parcialMedia.innerHTML = "Precio machimbre de 1/2: $" + totalMedia;
+        mensajeResultado.appendChild(parcialMedia);
 
         var totalTresCuarto = precioParcial(precioMachimbre.trescuarto, cuantoTrescuarto);
-        console.log("Precio machimbre de 3/4: $" + totalTresCuarto);
+        let parcialTrescuarto = document.createElement("p");
+        parcialTrescuarto.innerHTML = "Precio machimbre de 3/4: $" + totalTresCuarto;
+        mensajeResultado.appendChild(parcialTrescuarto);
+
 
         var totalUna = precioParcial(precioMachimbre.una, cuantoUna);
-        console.log("Precio machimbre de 1: $" + totalUna);
+        let parcialUna = document.createElement("p");
+        parcialUna.innerHTML = "Precio machimbre de 1: $" + totalUna;
+        mensajeResultado.appendChild(parcialUna);
+
 
         var precioTotal = (totalMedia + totalTresCuarto + totalUna);
-        console.log("Precio total del presupuesto: $" + precioTotal);
-
+        let totalPresupuesto = document.createElement("p");
+        totalPresupuesto.innerHTML = "TOTAL PRESUPUESTO: $" + precioTotal;
+        mensajeResultado.appendChild(totalPresupuesto);
 
     }
 
