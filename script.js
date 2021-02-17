@@ -5,12 +5,16 @@ function StockMachimbre(media, trescuarto, una) {
     this.trescuarto = trescuarto;
     this.una = una;
 }
+function StockProducto(tipo, cantidad) {
+    this.tipo = tipo;
+    this.cantidad = cantidad;
+}
 
 function cargarStock() {
 
-    let stockMedia = document.getElementById("stockMedia").value;
-    let stockTrescuarto = document.getElementById("stockTrescuarto").value;
-    let stockUna = document.getElementById("stockUna").value;
+    let stockMedia = $("#stockMedia").val();
+    let stockTrescuarto = $("#stockTrescuarto").val();
+    let stockUna = $("#stockUna").val();
 
     let stockMachimbre = new StockMachimbre(stockMedia, stockTrescuarto, stockUna);
 
@@ -21,7 +25,7 @@ function cargarStock() {
         console.log("STOCK NO CARGADO");
     }
 
-    localStorage.setItem("stock", JSON.stringify(stockMachimbre));              //<<<<<Guardo datos
+    localStorage.setItem("stockMachimbre", JSON.stringify(stockMachimbre));              //<<<<<Guardo datos
 
 
 
@@ -34,12 +38,17 @@ function PrecioMachimbre(media, trescuarto, una) {
     this.trescuarto = trescuarto;
     this.una = una;
 }
+function PrecioProducto(tipo, precio) {
+    this.tipo = tipo;
+    this.precio = precio;
+}
+
 
 function cargarPrecios() {
 
-    let precioMedia = document.getElementById("precioMedia").value;
-    let precioTrescuarto = document.getElementById("precioTrescuarto").value;
-    let precioUna = document.getElementById("precioUna").value;
+    let precioMedia = $("#precioMedia").val();
+    let precioTrescuarto = $("#precioTrescuarto").val();
+    let precioUna = $("#precioUna").val();
 
     let precioMachimbre = new PrecioMachimbre(precioMedia, precioTrescuarto, precioUna);
 
@@ -50,7 +59,7 @@ function cargarPrecios() {
         console.log("PRECIOS NO CARGADOS");
     }
 
-    localStorage.setItem("precio", JSON.stringify(precioMachimbre));              //<<<<<Guardo datos
+    localStorage.setItem("precioMachimbre", JSON.stringify(precioMachimbre));              //<<<<<Guardo datos
 
 
 }
@@ -59,29 +68,32 @@ function cargarPrecios() {
 
 //-------------------------------------------------------------------------------------------PRESUPUESTO--
 
+$("#cuantoMedia").val(0);
+$("#cuantoTrescuarto").val(0);
+$("#cuantoUna").val(0);
 
 function presupuestar() {
 
+    let cuantoMedia = parseInt($("#cuantoMedia").val());
+    let cuantoTrescuarto = parseInt($("#cuantoTrescuarto").val());
+    let cuantoUna = parseInt($("#cuantoUna").val());
 
-    let cuantoMedia = document.getElementById("cuantoMedia").value;
-    let cuantoTrescuarto = document.getElementById("cuantoTrescuarto").value;
-    let cuantoUna = document.getElementById("cuantoUna").value;
-
-    let stockMachimbre = JSON.parse(localStorage.getItem("stock"));     //RECUPERO DATOS
-    let precioMachimbre = JSON.parse(localStorage.getItem("precio"));   //<<<<<<<<<<<<<<
+    
+    let stockMachimbre = JSON.parse(localStorage.getItem("stockMachimbre"));     //RECUPERO DATOS
+    let precioMachimbre = JSON.parse(localStorage.getItem("precioMachimbre"));   //<<<<<<<<<<<<<<
 
 
     if (cuantoMedia > stockMachimbre.media || cuantoTrescuarto > stockMachimbre.trescuarto || cuantoUna > stockMachimbre.una) {
 
-        let mensajeStock = document.getElementById("mensajeStock");
-        mensajeStock.innerHTML = "No hay disponibre en esa cantidad, intente otro valor.";
+
+        $("#mensajeResultado").append('<p id="mensajeStock">No hay disponibilidad de stock, intente otro valor.</p>');
+
 
     } else {
 
-
-
-        mensajeStock.innerHTML = "Disponibilidad: OK";
-        let mensajeResultado = document.getElementById("mensajeResultado");
+        $("#mensajeStock").remove();
+        $("#mensajeResultado").append('<p id="mensajeStock">Disponibilidad: OK.</p>');
+        let mensajeResultado = $("#mensajeResultado");
 
 
 
@@ -89,28 +101,35 @@ function presupuestar() {
             var resultado = precio * cantidad;
             return resultado;
         }
-
+        
         var totalMedia = precioParcial(precioMachimbre.media, cuantoMedia);
-        let parcialMedia = document.createElement("p");
-        parcialMedia.innerHTML = "Precio machimbre de 1/2: $" + totalMedia;
-        mensajeResultado.appendChild(parcialMedia);
+        while (cuantoMedia != 0){
+            let parcialMedia = document.createElement("p");
+            parcialMedia.innerHTML = "Precio machimbre de 1/2: $" + totalMedia;
+            mensajeResultado.append(parcialMedia);
+            break;
+        }
 
         var totalTresCuarto = precioParcial(precioMachimbre.trescuarto, cuantoTrescuarto);
-        let parcialTrescuarto = document.createElement("p");
-        parcialTrescuarto.innerHTML = "Precio machimbre de 3/4: $" + totalTresCuarto;
-        mensajeResultado.appendChild(parcialTrescuarto);
-
-
+        while (cuantoTrescuarto != 0){
+            let parcialTrescuarto = document.createElement("p");
+            parcialTrescuarto.innerHTML = "Precio machimbre de 3/4: $" + totalTresCuarto;
+            mensajeResultado.append(parcialTrescuarto);
+            break;
+        }
+        
         var totalUna = precioParcial(precioMachimbre.una, cuantoUna);
-        let parcialUna = document.createElement("p");
-        parcialUna.innerHTML = "Precio machimbre de 1: $" + totalUna;
-        mensajeResultado.appendChild(parcialUna);
-
+        while (cuantoUna != 0){
+            let parcialUna = document.createElement("p");
+            parcialUna.innerHTML = "Precio machimbre de 1: $" + totalUna;
+            mensajeResultado.append(parcialUna);
+            break;
+        }
 
         var precioTotal = (totalMedia + totalTresCuarto + totalUna);
         let totalPresupuesto = document.createElement("p");
         totalPresupuesto.innerHTML = "TOTAL PRESUPUESTO: $" + precioTotal;
-        mensajeResultado.appendChild(totalPresupuesto);
+        mensajeResultado.append(totalPresupuesto);
 
     }
 
