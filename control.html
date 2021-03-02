@@ -18,9 +18,9 @@
 </head>
 
 <body>
-  <div class="container-fluid">
+  <div class="container-fluid slideInDown">
     <div class="row">
-      <header class="col-12 col-sm-12 col-md-12 centerInXY">
+      <header class="col-12 col-sm-12 col-md-12 centerInXY showUp">
         <h1 class="col-12 col-sm-12 col-md-12 text--alignCenter">Maderera LC</h1>
         <p class="col-12 col-sm-12 col-md-12 text--alignCenter capitalFont">Presupuestador y disponibilidad Stock</p>
         <div class="col-md-12 btnIndex">
@@ -31,64 +31,144 @@
     </div>
   </div>
 
-  <div class="container-fluid" id="control">
+  <div class="container-fluid fadeInUp" id="control">
     <div class="row">
-      <h2 class="col-md-12">PARTE DEL VENDEDOR</h2>
-      <div class="col-md-6">
-        <h3 class="col-md-12">Control de stock total en m²</h3>
-        <form>
+      <div class="col-12">
+        <h2>Control</h2>
+        <p class="font20px">Colocar los datos requeridos en cada seccion, solo así podrán se utilizados para presupuestar.</p>
+        <p class="font20px">En caso de que ya se haya ingresado valores antes, estos quedan guardados y se muestran para poder modificar valores.</p>
+      </div>
+    </div>
+    <div class="accordion" id="accordionExample">
+      <div class="card">
+        <div class="card-header" id="heading1">
+          <h2 class="mb-0">
+            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+              Machimbre
+            </button>
+          </h2>
+        </div>
+    
+        <div id="collapse1" class="collapse" aria-labelledby="heading1" data-parent="#accordionExample">
           <div class="row">
-            <label class="col-sm-6 col-form-label">Machimbre de 1/2 pulgada:</label>
-            <div class="col-sm-6">
-              <input type="number" class="form-control" id="stockMedia">
+            <div class="col-md-6">
+              <h3 class="col-md-12">Control de <strong>stock</strong> total en m²</h3>
+              <form>
+                <div class="row">
+                  <label class="col-sm-6 col-form-label">1/2 pulgada:</label>
+                  <div class="col-sm-6">
+                    <input type="number" class="form-control" id="stockMedia">
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-sm-6 col-form-label">3/4 pulgada:</label>
+                  <div class="col-sm-6">
+                    <input type="number" class="form-control" id="stockTrescuarto">
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-sm-6 col-form-label">1 pulgada:</label>
+                  <div class="col-sm-6">
+                    <input type="number" class="form-control" id="stockUna">
+                  </div>
+                </div>
+                <button type="button" onclick="cargarStockMachimbre()" class="btn btn-primary">Cargar</button>
+              </form>
+            </div>
+            <div class="col-md-6">
+              <h3 class="col-md-12">Control de <strong>precio</strong> por m²</h3>
+              <form>
+                <div class="row">
+                  <label class="col-sm-6 col-form-label">1/2 pulgada:</label>
+                  <div class="col-sm-6">
+                    <input type="number" class="form-control" id="precioMedia">
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-sm-6 col-form-label">3/4 pulgada:</label>
+                  <div class="col-sm-6">
+                    <input type="number" class="form-control" id="precioTrescuarto">
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-sm-6 col-form-label">1 pulgada:</label>
+                  <div class="col-sm-6">
+                    <input type="number" class="form-control" id="precioUna">
+                  </div>
+                </div>
+                <button type="button" onclick="cargarPreciosMachimbre()" class="btn btn-primary">Cargar</button>
+              </form>
             </div>
           </div>
-          <div class="row">
-            <label class="col-sm-6 col-form-label">Machimbre de 3/4 pulgada:</label>
-            <div class="col-sm-6">
-              <input type="number" class="form-control" id="stockTrescuarto">
-            </div>
-          </div>
-          <div class="row">
-            <label class="col-sm-6 col-form-label">Machimbre de 1 pulgada:</label>
-            <div class="col-sm-6">
-              <input type="number" class="form-control" id="stockUna">
-            </div>
-          </div>
-          <button type="button" onclick="cargarStock()" class="btn btn-primary">Cargar</button>
-        </form>
-
+        </div>
       </div>
 
-      <div class="col-md-6">
-        <h3 class="col-md-12">Control de precio por m²</h3>
-        <form>
+      <div class="card">
+        <div class="card-header" id="heading2">
+          <h2 class="mb-0">
+            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+              Placas
+            </button>
+          </h2>
+        </div>
+        <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordionExample">
           <div class="row">
-            <label class="col-sm-6 col-form-label">Machimbre de 1/2 pulgada:</label>
-            <div class="col-sm-6">
-              <input type="number" class="form-control" id="precioMedia">
+            <div class="col-md-6">
+              <h3 class="col-md-12">Control de <strong>stock</strong> total por unidad</h3>
+              <form>
+                <div class="row">
+                  <label class="col-sm-6 col-form-label">Placa OSB:</label>
+                  <div class="col-sm-6">
+                    <input type="number" class="form-control" id="stockOSB">
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-sm-6 col-form-label">Terciado:</label>
+                  <div class="col-sm-6">
+                    <input type="number" class="form-control" id="stockTerciado">
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-sm-6 col-form-label">Durlock:</label>
+                  <div class="col-sm-6">
+                    <input type="number" class="form-control" id="stockDurlock">
+                  </div>
+                </div>
+                <button type="button" onclick="cargarStockPlacas()" class="btn btn-primary">Cargar</button>
+              </form>
+            </div>
+            <div class="col-md-6">
+              <h3 class="col-md-12">Control de <strong>precio</strong> por unidad:</h3>
+              <form>
+                <div class="row">
+                  <label class="col-sm-6 col-form-label">Placa OSB:</label>
+                  <div class="col-sm-6">
+                    <input type="number" class="form-control" id="precioOSB">
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-sm-6 col-form-label">Terciado:</label>
+                  <div class="col-sm-6">
+                    <input type="number" class="form-control" id="precioTerciado">
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-sm-6 col-form-label">Durlock:</label>
+                  <div class="col-sm-6">
+                    <input type="number" class="form-control" id="precioDurlock">
+                  </div>
+                </div>
+                <button type="button" onclick="cargarPreciosPlacas()" class="btn btn-primary">Cargar</button>
+              </form>
             </div>
           </div>
-          <div class="row">
-            <label class="col-sm-6 col-form-label">Machimbre de 3/4 pulgada:</label>
-            <div class="col-sm-6">
-              <input type="number" class="form-control" id="precioTrescuarto">
-            </div>
-          </div>
-          <div class="row">
-            <label class="col-sm-6 col-form-label">Machimbre de 1 pulgada:</label>
-            <div class="col-sm-6">
-              <input type="number" class="form-control" id="precioUna">
-            </div>
-          </div>
-          <button type="button" onclick="cargarPrecios()" class="btn btn-primary">Cargar</button>
-        </form>
+        </div>
       </div>
     </div>
   </div>
-
-  <footer class="container-fluid">
-    <div class="row">
+  
+  <footer class="container-fluid fadeInUp">
+    <div class="row showUp">
       <h2>Contacto</h2>
     </div>
   </footer>

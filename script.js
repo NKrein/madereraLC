@@ -1,16 +1,37 @@
+//--------------------------------------------------------------------------------------RECUPERO DATOS EN CASO DE TENERLOS--
 
-//--------------------------------------------------------------------------------------DEFINICION STOCK--
+let stockMachimbre = JSON.parse(localStorage.getItem("stockMachimbre"));        //RECUPERO DATOS
+let precioMachimbre = JSON.parse(localStorage.getItem("precioMachimbre"));      //<<<<<<<<<<<<<<
+let stockPlacas = JSON.parse(localStorage.getItem("stockPlacas"));              //RECUPERO DATOS
+let precioPlacas = JSON.parse(localStorage.getItem("precioPlacas"));            //<<<<<<<<<<<<<<
+
+$("#stockMedia").val(stockMachimbre.media);
+$("#stockTrescuarto").val(stockMachimbre.trescuarto);
+$("#stockUna").val(stockMachimbre.una);
+$("#stockOSB").val(stockPlacas.osb);
+$("#stockTerciado").val(stockPlacas.terciado);
+$("#stockDurlock").val(stockPlacas.durlock);
+$("#precioMedia").val(precioMachimbre.media);
+$("#precioTrescuarto").val(precioMachimbre.trescuarto);
+$("#precioUna").val(precioMachimbre.una);
+$("#precioOSB").val(precioPlacas.osb);
+$("#precioTerciado").val(precioPlacas.terciado);
+$("#precioDurlock").val(precioPlacas.durlock);
+
+//--------------------------------------------------------------------------------------DEFINICION STOCK--------------------
+
 function StockMachimbre(media, trescuarto, una) {
     this.media = media;
     this.trescuarto = trescuarto;
     this.una = una;
 }
-function StockProducto(tipo, cantidad) {
-    this.tipo = tipo;
-    this.cantidad = cantidad;
+function StockPlacas(osb, terciado, durlock) {
+    this.osb = osb;
+    this.terciado = terciado;
+    this.durlock = durlock;
 }
 
-function cargarStock() {
+function cargarStockMachimbre() {
 
     let stockMedia = $("#stockMedia").val();
     let stockTrescuarto = $("#stockTrescuarto").val();
@@ -27,24 +48,44 @@ function cargarStock() {
 
     localStorage.setItem("stockMachimbre", JSON.stringify(stockMachimbre));              //<<<<<Guardo datos
 
+}
 
+function cargarStockPlacas() {
+
+    let stockOSB = $("#stockOSB").val();
+    let stockTerciado = $("#stockTerciado").val();
+    let stockDurlock = $("#stockDurlock").val();
+
+    let stockPlacas = new StockPlacas(stockOSB, stockTerciado, stockDurlock);
+
+    if (stockOSB != "" && stockTerciado != "" && stockDurlock != "") {
+        console.log(stockPlacas);
+        console.log("STOCK PLACAS");
+    } else {
+        console.log("STOCK PLACAS NO CARGADO");
+    }
+
+    localStorage.setItem("stockPlacas", JSON.stringify(stockPlacas));              //<<<<<Guardo datos
 
 }
 
 
-//------------------------------------------------------------------------------------DEFINICION PRECIOS--
+//--------------------------------------------------------------------------------------DEFINICION PRECIOS-------------------
+
 function PrecioMachimbre(media, trescuarto, una) {
     this.media = media;
     this.trescuarto = trescuarto;
     this.una = una;
 }
-function PrecioProducto(tipo, precio) {
-    this.tipo = tipo;
-    this.precio = precio;
+function PrecioPlacas(osb, terciado, durlock) {
+    this.osb = osb;
+    this.terciado = terciado;
+    this.durlock = durlock;
 }
 
 
-function cargarPrecios() {
+
+function cargarPreciosMachimbre() {
 
     let precioMedia = $("#precioMedia").val();
     let precioTrescuarto = $("#precioTrescuarto").val();
@@ -61,29 +102,61 @@ function cargarPrecios() {
 
     localStorage.setItem("precioMachimbre", JSON.stringify(precioMachimbre));              //<<<<<Guardo datos
 
+}
+
+function cargarPreciosPlacas() {
+
+    let precioOSB = $("#precioOSB").val();
+    let precioTerciado = $("#precioTerciado").val();
+    let precioDurlock = $("#precioDurlock").val();
+
+    let precioPlacas = new PrecioPlacas(precioOSB, precioTerciado, precioDurlock);
+
+    if (precioOSB != "" && precioTerciado != "" && precioDurlock != "") {
+        console.log(precioPlacas);
+        console.log("PRECIO PLACAS");
+    } else {
+        console.log("PRECIO PLACAS NO CARGADO");
+    }
+
+    localStorage.setItem("precioPlacas", JSON.stringify(precioPlacas));              //<<<<<Guardo datos
 
 }
 
 
 
-//-------------------------------------------------------------------------------------------PRESUPUESTO--
+
+//---------------------------------------------------------------------------------------PRESUPUESTO-------------------------
 
 $("#cuantoMedia").val(0);
 $("#cuantoTrescuarto").val(0);
 $("#cuantoUna").val(0);
+$("#cuantoOSB").val(0);
+$("#cuantoTerciado").val(0);
+$("#cuantoDurlock").val(0);
+
+
 
 function presupuestar() {
+    $("#mensajeResultado p").remove();
+
 
     let cuantoMedia = parseInt($("#cuantoMedia").val());
     let cuantoTrescuarto = parseInt($("#cuantoTrescuarto").val());
     let cuantoUna = parseInt($("#cuantoUna").val());
+    let cuantoOSB = parseInt($("#cuantoOSB").val());
+    let cuantoTerciado = parseInt($("#cuantoTerciado").val());
+    let cuantoDurlock = parseInt($("#cuantoDurlock").val());
+
 
     
-    let stockMachimbre = JSON.parse(localStorage.getItem("stockMachimbre"));     //RECUPERO DATOS
-    let precioMachimbre = JSON.parse(localStorage.getItem("precioMachimbre"));   //<<<<<<<<<<<<<<
+    let stockMachimbre = JSON.parse(localStorage.getItem("stockMachimbre"));        //RECUPERO DATOS
+    let precioMachimbre = JSON.parse(localStorage.getItem("precioMachimbre"));      //<<<<<<<<<<<<<<
+    let stockPlacas = JSON.parse(localStorage.getItem("stockPlacas"));              //RECUPERO DATOS
+    let precioPlacas = JSON.parse(localStorage.getItem("precioPlacas"));            //<<<<<<<<<<<<<<
 
 
-    if (cuantoMedia > stockMachimbre.media || cuantoTrescuarto > stockMachimbre.trescuarto || cuantoUna > stockMachimbre.una) {
+    if (cuantoMedia > stockMachimbre.media || cuantoTrescuarto > stockMachimbre.trescuarto || cuantoUna > stockMachimbre.una || cuantoOSB > stockPlacas.osb || cuantoTerciado > stockPlacas.terciado|| cuantoDurlock > stockPlacas.durlock) {
 
 
         $("#mensajeResultado").append('<p id="mensajeStock">No hay disponibilidad de stock, intente otro valor.</p>');
@@ -93,6 +166,7 @@ function presupuestar() {
 
         $("#mensajeStock").remove();
         $("#mensajeResultado").append('<p id="mensajeStock">Disponibilidad: OK.</p>');
+
         let mensajeResultado = $("#mensajeResultado");
 
 
@@ -126,7 +200,32 @@ function presupuestar() {
             break;
         }
 
-        var precioTotal = (totalMedia + totalTresCuarto + totalUna);
+        var totalOSB = precioParcial(precioPlacas.osb, cuantoOSB);
+        while (cuantoOSB != 0){
+            let parcialOSB = document.createElement("p");
+            parcialOSB.innerHTML = cuantoOSB + " Placas OSB: $" + totalOSB;
+            mensajeResultado.append(parcialOSB);
+            break;
+        }
+
+        var totalTerciado = precioParcial(precioPlacas.terciado, cuantoTerciado);
+        while (cuantoTerciado != 0){
+            let parcialTerciado = document.createElement("p");
+            parcialTerciado.innerHTML = cuantoTerciado + " Placas Terciado: $" + totalTerciado;
+            mensajeResultado.append(parcialTerciado);
+            break;
+        }
+
+        var totalDurlock = precioParcial(precioPlacas.durlock, cuantoDurlock);
+        while (cuantoDurlock != 0){
+            let parcialDurlock = document.createElement("p");
+            parcialDurlock.innerHTML = cuantoDurlock + " Placas Durlock: $" + totalDurlock;
+            mensajeResultado.append(parcialDurlock);
+            break;
+        }
+
+
+        var precioTotal = (totalMedia + totalTresCuarto + totalUna + totalOSB + totalTerciado + totalDurlock);
         let totalPresupuesto = document.createElement("p");
         totalPresupuesto.innerHTML = "TOTAL PRESUPUESTO: $" + precioTotal;
         mensajeResultado.append(totalPresupuesto);

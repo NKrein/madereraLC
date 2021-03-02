@@ -1,6 +1,20 @@
 html {
   scroll-behavior: smooth; }
 
+body {
+  font-family: 'Playfair Display', serif;
+  min-height: 100vh; }
+
+form {
+  padding: .5rem; }
+
+input {
+  font-family: 'Cinzel', serif; }
+
+.div-padding {
+  padding-top: 1rem;
+  padding-bottom: 1rem; }
+
 .centerInXY {
   display: grid;
   align-content: space-evenly;
@@ -34,12 +48,16 @@ footer {
   height: 20vh;
   width: 100%; }
 
+.font20px {
+  font-size: 20px; }
+
 #mensajeResultado {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  background-color: darkgray; }
+  background-color: darkgray;
+  font-family: Arial, Helvetica, sans-serif; }
 
 #mensajeStock {
   background-color: #fba618;
@@ -51,6 +69,77 @@ footer {
   justify-content: space-evenly;
   align-items: center; }
 
+.btn-presupuesto {
+  width: 150px;
+  border-radius: 15px;
+  font-family: 'Cinzel', serif;
+  font-weight: 600; }
+
 @media (max-width: 576px) {
   h1 {
     font-size: 50px; } }
+
+@keyframes showUp {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+.showUp {
+  animation-duration: 1s;
+  animation-name: showUp; }
+
+@keyframes slideInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-2000px); }
+  100% {
+    transform: translateY(0); } }
+
+.slideInDown {
+  animation-duration: 1s;
+  animation-name: slideInDown; }
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(2000px); }
+  100% {
+    opacity: 1;
+    transform: translateY(0); } }
+
+.fadeInUp {
+  animation-duration: 1s;
+  animation-name: fadeInUp; }
+
+@keyframes showInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-2000px); }
+  60% {
+    opacity: 1;
+    transform: translateX(30px); }
+  80% {
+    transform: translateX(-10px); }
+  100% {
+    transform: translateX(0); } }
+
+.showInLeft {
+  animation-duration: 2s;
+  animation-name: showInLeft; }
+
+@keyframes showInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(2000px); }
+  60% {
+    opacity: 1;
+    transform: translateX(-30px); }
+  80% {
+    transform: translateX(10px); }
+  100% {
+    transform: translateX(0); } }
+
+.showInRight {
+  animation-duration: 2s;
+  animation-name: showInRight; }
