@@ -1,4 +1,5 @@
-
+$(document).ready(function(){
+    
     $.ajax({
         url: "https://www.dolarsi.com/api/api.php?type=valoresprincipales",
         type: "GET",
@@ -13,7 +14,8 @@
         console.log(xhr);
         console.log(status);
         console.log(error);
-    }) 
+    });
+});
 
 
     //--------------------------------------------------------------------------------------RECUPERO DATOS EN CASO DE TENERLOS--
@@ -35,6 +37,14 @@ $("#precioUna").val(precioMachimbre.una);
 $("#precioOSB").val(precioPlacas.osb);
 $("#precioTerciado").val(precioPlacas.terciado);
 $("#precioDurlock").val(precioPlacas.durlock);
+
+if ($("#stockMedia").val() != "" || $("#stockTrescuarto").val() != "" || $("#stockUna").val() != "" || $("#stockOSB").val() != "" || $("#stockTerciado").val() != "" || $("#stockDurlock").val() != "") {
+    $("#alertStock").alert('close');
+}
+
+if ($("#precioMedia").val() != "" || $("#precioTrescuarto").val() != "" || $("#precioUna").val() != "" || $("#precioOSB").val() != "" || $("#precioTerciado").val() != "" || $("#precioDurlock").val() != "") {
+    $("#alertPrecios").alert('close');
+}
 
 //--------------------------------------------------------------------------------------DEFINICION STOCK--------------------
 
