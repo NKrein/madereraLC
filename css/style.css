@@ -40,13 +40,32 @@ h1 {
   text-align: center; }
 
 header {
-  background-color: #fba618;
+  background-image: url(https://source.unsplash.com/collection/39900804);
+  background-repeat: no-repeat;
+  background-size: cover;
   height: 70vh; }
 
+#back-img {
+  background-color: #fba618;
+  padding: 10vh 2vh 10vh 2vh; }
+
 footer {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 20px;
   background-color: #fa6f12;
-  height: 20vh;
+  height: auto;
   width: 100%; }
+  footer .contacto a {
+    text-decoration: none;
+    color: white; }
+    footer .contacto a img {
+      height: 25px; }
+  footer h3 {
+    transform: none; }
+  footer a:hover {
+    color: black;
+    transform: scale(1.1);
+    transition: all 0.5s; }
 
 .font20px {
   font-size: 20px; }

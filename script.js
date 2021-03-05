@@ -1,4 +1,22 @@
-//--------------------------------------------------------------------------------------RECUPERO DATOS EN CASO DE TENERLOS--
+
+    $.ajax({
+        url: "https://www.dolarsi.com/api/api.php?type=valoresprincipales",
+        type: "GET",
+        dataType: "json"
+    }).done( function(resultadoJson) {
+    console.log(resultadoJson);
+        var dolarHoyCompra = document.createTextNode("Valor Compra: AR$" + resultadoJson[1].casa.compra);
+        $("#valorCompra").append(dolarHoyCompra);
+        var dolarHoyVenta = document.createTextNode("Valor Venta: AR$" + resultadoJson[1].casa.venta);
+        $("#valorVenta").append(dolarHoyVenta);     
+    }).fail( function(xhr, status, error){         
+        console.log(xhr);
+        console.log(status);
+        console.log(error);
+    }) 
+
+
+    //--------------------------------------------------------------------------------------RECUPERO DATOS EN CASO DE TENERLOS--
 
 let stockMachimbre = JSON.parse(localStorage.getItem("stockMachimbre"));        //RECUPERO DATOS
 let precioMachimbre = JSON.parse(localStorage.getItem("precioMachimbre"));      //<<<<<<<<<<<<<<
@@ -46,7 +64,7 @@ function cargarStockMachimbre() {
         console.log("STOCK NO CARGADO");
     }
 
-    localStorage.setItem("stockMachimbre", JSON.stringify(stockMachimbre));              //<<<<<Guardo datos
+    localStorage.setItem("stockMachimbre", JSON.stringify(stockMachimbre));         //<<<<<Guardo datos
 
 }
 
@@ -65,7 +83,7 @@ function cargarStockPlacas() {
         console.log("STOCK PLACAS NO CARGADO");
     }
 
-    localStorage.setItem("stockPlacas", JSON.stringify(stockPlacas));              //<<<<<Guardo datos
+    localStorage.setItem("stockPlacas", JSON.stringify(stockPlacas));               //<<<<<Guardo datos
 
 }
 
@@ -100,7 +118,7 @@ function cargarPreciosMachimbre() {
         console.log("PRECIOS NO CARGADOS");
     }
 
-    localStorage.setItem("precioMachimbre", JSON.stringify(precioMachimbre));              //<<<<<Guardo datos
+    localStorage.setItem("precioMachimbre", JSON.stringify(precioMachimbre));        //<<<<<Guardo datos
 
 }
 
